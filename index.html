@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+ <head>
+ <title>Ogre Attack</title>
+ <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+
+ <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+ <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+ <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js"></script>
+
+ <script src="js/shoot.js"></script>
+ <script src="js/ogre.js"></script>
+ </head>
+ <body>
+  <a-scene id="scene" inspector-plugin-recast>
+      
+   <!--Game Environment-->
+    <a-entity id="environment" environment="preset:arches;skyType : gradient;lighting : directional"></a-entity>
+
+   <!--Game Assets-->
+   <a-assets>
+    <a-asset-item id="ogre" src="./ogre_walking/scene.gltf"></a-asset-item>
+    <a-asset-item id="weapon" src="./bobs_sniper-rifle/scene.gltf"></a-asset-item>
+   </a-assets>
+
+   <!--Camera and Player Section-->
+   <a-entity>
+    <a-entity id="camera"  camera  wasd-controls  look-controls="enabled: true"   position="0 2 0">
+     <a-entity id="player" gltf-model="#weapon" scale="1 1 1" position="0 -0.9 -1.5"></a-entity>
+     <a-cursor color="black"></a-cursor>
+
+    <!--Text-->
+     <a-entity id="inst" position="0 7 -8" text="font: mozillavr;width: 5;height: 5;value: PRESS 'Arrow' keys to move"></a-entity>
+     </a-entity>
+     <a-entity id="inst2" position="0 5 -8" text="font: mozillavr;width: 3;height: 3;value: PRESS 'S' to shoot bullets"></a-entity>
+     </a-entity>
+     <!--PlayerLife Text-->
+     <a-entity id="Life_text" position="-10 7 -8"  text="font: dejavu;width: 4.5;height:4.5;value: PlayerLife: 5"></a-entity>
+     <!--Game Over Text-->
+     <a-entity id="over" position="0 7 -12" text="font: mozillavr;width: 5;height: 5;value:Game Over" visible="false"></a-entity>
+   </a-entity>
+   
+
+
+   <!--Bullet-->
+    <a-entity id="bullets" fire-balls></a-entity>
+    <a-entity id="'ogre_balls" ogre-ball></a-entity>
+
+    <!--Ogre or Enemy entity-->
+     <a-entity id="ogre1" gltf-model="#ogre" scale="0.015 0.015 0.015"  position="0 1 -100" 
+       animation-mixer  dynamic-body
+       animation="property:position;to: 0 0 -15;loop :true;dur : 40000;easing: linear;dir : alternate"></a-entity>
+
+     <a-entity id="ogre2" gltf-model="#ogre" scale="0.015 0.015 0.015" position="-60 1 -90" dynamic-body
+     animation-mixer animation="property:position;to: -30 0 -15;loop :true;dur : 50000;easing: linear;dir : alternate"></a-entity>
+     <a-entity id="ogre3" gltf-model="#ogre" scale="0.015 0.015 0.015" position="20 1 -100" dynamic-body
+     animation-mixer animation="property:position;to: 15 0 -15;loop :true;dur : 60000;easing: linear;dir : alternate"></a-entity>
+     <a-entity id="ogre4" gltf-model="#ogre" scale="0.015 0.015 0.015" position="-100 1 -80" dynamic-body
+     animation-mixer animation="property:position;to: -50 0 -15;loop :true;dur : 70000;easing: linear;dir : alternate"></a-entity>
+     <a-entity id="ogre5" gltf-model="#ogre" scale="0.015 0.015 0.015" position="50 1 -70" 
+     rotation="0 -15 0"   dynamic-body
+     animation-mixer animation="property:position;to: 35 0 -15;loop :true;dur : 40000;easing: linear;dir : alternate"></a-entity>
+
+   <!--Ground-->
+    <a-plane id="ground" width="200" height="200" repeat="5 5"  color="orange"  rotation="-90 0 0" position="0 0 -5" 
+     static-body visible="false"></a-plane>
+
+  </a-scene>
+ </body>
+</html>
